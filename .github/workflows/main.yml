@@ -24,11 +24,11 @@ jobs:
       - shell: bash
         name: Run a YOUR_SECRET
         run: |
-          echo Add other actions to build ${{secrets.YOUR_SECRET}},
+          echo "Add other actions to build ${{ secrets.YOUR_SECRET }}"
       - shell: bash
         name: Run a REPO_SECRET
         run: |
-          echo test, and deploy your project ${{ env.REPO_SECRET }}.
+          echo "test, and deploy your project ${{ env.REPO_SECRET }}""
 
   back-build:
     runs-on: ubuntu-latest
@@ -37,11 +37,11 @@ jobs:
       - shell: bash
         name: Run a SECRET
         run: |
-          echo Add other actions to build ${{secrets.YOUR_SECRET}},
+          echo "Add other actions to build ${{ secrets.YOUR_SECRET }}"
       - shell: bash
         name: Run a REPO_SECRET
         run: |
-          echo test, and deploy your project ${{ env.REPO_SECRET }}
+          echo "test, and deploy your project ${{ env.REPO_SECRET }}"
       - shell: bash
         run: |
           expr 3 + 7 > math-homework.txt
@@ -61,7 +61,7 @@ jobs:
       - shell: bash
         name: Run a SECRET
         run: |
-          echo Add other actions to build ${{secrets.YOUR_SECRET}},
+          echo "Add other actions to build ${{ secrets.YOUR_SECRET }}"
 
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2
@@ -80,7 +80,7 @@ jobs:
       - shell: bash
         name: Run a SECRET
         run: |
-          echo Add other actions to build ${{secrets.YOUR_SECRET}},
+          echo "Add other actions to build ${{ secrets.YOUR_SECRET }}"
 
       # - name: Archive code coverage results
       #   uses: actions/upload-artifact@v2
@@ -110,8 +110,8 @@ jobs:
       - shell: bash
         name: Run a SECRET
         run: |
-          echo Add other actions to build ${{secrets.YOUR_SECRET}},
-          echo test, and deploy your project ${{ env.REPO_SECRET }}.
+          echo "Add other actions to build ${{ secrets.YOUR_SECRET }}"
+          echo "test, and deploy your project ${{ env.REPO_SECRET }}"
       # - name: Archive code coverage results
       #   uses: actions/upload-artifact@v2
       #   with:
