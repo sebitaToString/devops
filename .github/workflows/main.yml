@@ -10,6 +10,8 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
+env:
+  REPO_SECRET: ${{secrets.REPO_SECRET}}
 jobs:
   front-build:
     runs-on: ubuntu-latest
@@ -19,15 +21,19 @@ jobs:
       - uses: actions/checkout@v2
       - name: Run a one-line script
         run: echo Hello, world!
-      - name: Run a multi-line script
+      - name: Run a SECRET
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          echo Add other actions to build ${{secrets.YOUR_SECRET}},
+          echo test, and deploy your project ${{ env.REPO_SECRET }}.
 
   back-build:
     runs-on: ubuntu-latest
     environment: dev
     steps:
+      - name: Run a SECRET
+        run: |
+          echo Add other actions to build ${{secrets.YOUR_SECRET}},
+          echo test, and deploy your project ${{ env.REPO_SECRET }}.
       - shell: bash
         run: |
           expr 3 + 7 > math-homework.txt
@@ -44,7 +50,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - name: Run a SECRET
+        run: |
+          echo Add other actions to build ${{secrets.YOUR_SECRET}},
 
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2
@@ -62,7 +70,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - name: Run a SECRET
+        run: |
+          echo Add other actions to build ${{secrets.YOUR_SECRET}},
 
       # - name: Archive code coverage results
       #   uses: actions/upload-artifact@v2
@@ -89,8 +99,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
+      - name: Run a SECRET
+        run: |
+          echo Add other actions to build ${{secrets.YOUR_SECRET}},
+          echo test, and deploy your project ${{ env.REPO_SECRET }}.
       # - name: Archive code coverage results
       #   uses: actions/upload-artifact@v2
       #   with:
