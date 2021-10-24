@@ -28,14 +28,14 @@ jobs:
       - shell: bash
         name: Run a REPO_SECRET
         run: |
-          echo "test, and deploy your project ${{ env.REPO_SECRET }}""
+          echo "test, and deploy your project ${{ env.REPO_SECRET }}"
 
   back-build:
     runs-on: ubuntu-latest
     environment: dev
     steps:
       - shell: bash
-        name: Run a SECRET
+        name: Run a YOUR_SECRET
         run: |
           echo "Add other actions to build ${{ secrets.YOUR_SECRET }}"
       - shell: bash
