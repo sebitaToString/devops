@@ -6,31 +6,104 @@ name: main-pipeline
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
-
-  # Allows you to run this workflow manually from the Actions tab
+    branches: [main]
   workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  front-build:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    environment: develop
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
-      # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+
+  back-build:
+    runs-on: ubuntu-latest
+    environment: develop
+    steps:
+      - shell: bash
+        run: |
+          expr 3 + 7 > math-homework.txt
+      - name: Upload math result for job 1
+        uses: actions/upload-artifact@v2
+        with:
+          name: homework
+          path: math-homework.txt
+          retention-days: 1
+
+  front-test:
+    needs: front-build
+    environment: test
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v2
+        with:
+          name: code-coverage-report
+          path: output/test/code-coverage.html
+      - name: Download a single artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: file-markdown
+
+  back-test:
+    needs: back-build
+    environment: test
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # - name: Archive code coverage results
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: code-coverage-report
+      #     path: output/test/code-coverage.html
+      #     retention-days: 5
+
+      - name: Download math result
+        uses: actions/download-artifact@v2
+        with:
+          name: homework
+      - name: Print the final result homework
+        shell: bash
+        run: |
+          value=`cat math-homework.txt`
+          echo The result is $value
+
+  app-prod:
+    needs:
+      - back-test
+      - front-test
+    environment: production
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # - name: Archive code coverage results
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: code-coverage-report
+      #     path: output/test/code-coverage.html
+      #     retention-days: 5
+
+      - name: Download math result
+        uses: actions/download-artifact@v2
+        with:
+          name: homework
+      - name: Print the final result homework
+        shell: bash
+        run: |
+          value=`cat math-homework.txt`
+          echo The result is $value
