@@ -1,5 +1,6 @@
 name: Call a reusable workflow with Dispatch
 
+on:
   workflow_dispatch:
     inputs:
       logLevel:
