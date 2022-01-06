@@ -1,8 +1,6 @@
-name: Call a reusable workflow with Dispatch
-
+name: Manually triggered workflow and Call workflow
 on:
   workflow_dispatch:
-    inputs:
       logLevel:
         description: 'Log level'     
         required: true
