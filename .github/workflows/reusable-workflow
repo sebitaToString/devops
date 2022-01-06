@@ -1,0 +1,8 @@
+name: Call a reusable workflow and use its outputs
+
+on:
+  workflow_dispatch:
+
+jobs:
+  job1:
+    uses: ignacio-valencia/example-repo/.github/workflows/called-workflow.yml@main
