@@ -23,9 +23,10 @@ on:
 jobs:
   print-tag:
     runs-on: ubuntu-latest
-
     steps:
       - name: Print the input tag to STDOUT
         run: echo The tag is ${{ github.event.inputs.tag }}
   call-workflow:
     uses: ignacio-valencia/example-repo/.github/workflows/called-workflow.yml@main
+    with:
+      username: donxo
