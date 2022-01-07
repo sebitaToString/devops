@@ -22,7 +22,7 @@ on:
   
 jobs:
   developer-call:
-    uses: ignacio-valencia/example-repo/.github/workflows/called-workflow.yml@main
+    uses: ignacio-valencia/example-repo/workflows/called-workflow.yml@main
     with:
       username: donxo
   print-tag:
