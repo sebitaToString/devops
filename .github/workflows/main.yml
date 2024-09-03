@@ -70,7 +70,7 @@ jobs:
           name: code-coverage-report
           path: output/test/code-coverage.html
       - name: Download a single artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
 
   back-test:
     needs: back-build
@@ -91,7 +91,7 @@ jobs:
       #     retention-days: 5
 
       - name: Download math result
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
         with:
           name: homework
       - name: Print the final result homework
@@ -121,7 +121,7 @@ jobs:
       #     retention-days: 5
 
       - name: Download math result
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
         with:
           name: homework
       - name: Print the final result homework
@@ -151,7 +151,7 @@ jobs:
       #     retention-days: 5
 
       - name: Download math result
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
         with:
           name: homework
       - name: Print the final result homework
